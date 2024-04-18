@@ -11,12 +11,15 @@ let elements = [];
 
 const server = http.createServer(app);
 
+app.use(cors());
+
 const io = new Server(server, {
   cors: {
     origin: "*",
   },
 });
 
+io.use(cors());
 io.on("connection", (socket) => {
   io.to(socket.id).emit("whiteboard-state", elements);
 
